@@ -186,6 +186,7 @@ class OtherButtons extends Toolbar {
   final bool help;
   final bool copy;
   final bool paste;
+  final bool close;
 
   const OtherButtons({
     this.fullscreen = true,
@@ -195,6 +196,7 @@ class OtherButtons extends Toolbar {
     this.help = true,
     this.copy = true,
     this.paste = true,
+    this.close = true,
   });
 
   List<Icon> getIcons1() {
@@ -204,6 +206,7 @@ class OtherButtons extends Toolbar {
     if (undo) icons.add(Icon(Icons.undo));
     if (redo) icons.add(Icon(Icons.redo));
     if (help) icons.add(Icon(Icons.help_outline));
+    if (close) icons.add(Icon(Icons.close));
     return icons;
   }
 

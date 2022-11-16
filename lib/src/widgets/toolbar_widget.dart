@@ -337,10 +337,13 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
             opacity: _enabled ? 1 : 0.5,
             child: Padding(
               padding: const EdgeInsets.all(5.0),
-              child: Wrap(
-                runSpacing: widget.htmlToolbarOptions.gridViewVerticalSpacing,
-                spacing: widget.htmlToolbarOptions.gridViewHorizontalSpacing,
-                children: _buildChildren(),
+              child: Container(
+                width: double.infinity,
+                child: Wrap(
+                  runSpacing: widget.htmlToolbarOptions.gridViewVerticalSpacing,
+                  spacing: widget.htmlToolbarOptions.gridViewHorizontalSpacing,
+                  children: _buildChildren(),
+                ),
               ),
             ),
           ),
@@ -2654,6 +2657,14 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   widget.controller.redo();
                 }
               }
+              if (t.getIcons1()[index].icon == Icons.close) {
+                var proceed = await widget.htmlToolbarOptions.onButtonPressed
+                    ?.call(ButtonType.close, null, null) ??
+                    true;
+                if (proceed) {
+                  widget.controller.clearFocus();
+                }
+              }
               if (t.getIcons1()[index].icon == Icons.help_outline) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.help, null, null) ??
@@ -2976,11 +2987,11 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
     } else {
       toolbarChildren.addAll(widget.htmlToolbarOptions.customToolbarButtons);
     }
-    if (widget.htmlToolbarOptions.renderSeparatorWidget) {
+    /*if (widget.htmlToolbarOptions.renderSeparatorWidget) {
       toolbarChildren = intersperse(
               widget.htmlToolbarOptions.separatorWidget, toolbarChildren)
           .toList();
-    }
+    }*/
     return toolbarChildren;
   }
 }
