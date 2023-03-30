@@ -2657,14 +2657,6 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   widget.controller.redo();
                 }
               }
-              if (t.getIcons1()[index].icon == Icons.close) {
-                var proceed = await widget.htmlToolbarOptions.onButtonPressed
-                    ?.call(ButtonType.close, null, null) ??
-                    true;
-                if (proceed) {
-                  widget.controller.clearFocus();
-                }
-              }
               if (t.getIcons1()[index].icon == Icons.help_outline) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.help, null, null) ??
@@ -2955,6 +2947,14 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                     var text = data.text!;
                     widget.controller.insertHtml(text);
                   }
+                }
+              }
+              if (t.getIcons2()[index].icon == Icons.close) {
+                var proceed = await widget.htmlToolbarOptions.onButtonPressed
+                        ?.call(ButtonType.close, null, null) ??
+                    true;
+                if (proceed) {
+                  widget.controller.clearFocus();
                 }
               }
             },

@@ -206,7 +206,6 @@ class OtherButtons extends Toolbar {
     if (undo) icons.add(Icon(Icons.undo));
     if (redo) icons.add(Icon(Icons.redo));
     if (help) icons.add(Icon(Icons.help_outline));
-    if (close) icons.add(Icon(Icons.close));
     return icons;
   }
 
@@ -214,6 +213,7 @@ class OtherButtons extends Toolbar {
     var icons = <Icon>[];
     if (copy) icons.add(Icon(Icons.copy));
     if (paste) icons.add(Icon(Icons.paste));
+    if (close) icons.add(Icon(Icons.close));
     return icons;
   }
 }
