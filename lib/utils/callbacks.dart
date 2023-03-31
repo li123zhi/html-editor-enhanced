@@ -25,6 +25,7 @@ class Callbacks {
     this.onNavigationRequestMobile,
     this.onPaste,
     this.onScroll,
+    this.onClose,
   });
 
   /// Called before certain commands are fired and the editor is in rich text view.
@@ -184,4 +185,7 @@ class Callbacks {
   /// Note: This function will be repeatedly called while the editor is scrolled.
   /// Make sure to factor that into your implementation.
   void Function()? onScroll;
+
+  ///点击关闭按钮时回调此方法 ios关闭键盘需要与原生交互
+  void Function()? onClose;
 }

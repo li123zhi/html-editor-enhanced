@@ -2955,6 +2955,10 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                     true;
                 if (proceed) {
                   widget.controller.clearFocus();
+                  if (widget.callbacks != null &&
+                      widget.callbacks!.onClose != null) {
+                    widget.callbacks!.onClose!();
+                  }
                 }
               }
             },
