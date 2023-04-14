@@ -5,6 +5,8 @@ abstract class Toolbar {
   const Toolbar();
 }
 
+final double imageSize = 16;
+
 /// Style group
 class StyleButtons extends Toolbar {
   final bool style;
@@ -47,12 +49,33 @@ class FontButtons extends Toolbar {
     this.subscript = true,
   });
 
-  List<Icon> getIcons1() {
-    var icons = <Icon>[];
-    if (bold) icons.add(Icon(Icons.format_bold));
-    if (italic) icons.add(Icon(Icons.format_italic));
-    if (underline) icons.add(Icon(Icons.format_underline));
-    if (clearAll) icons.add(Icon(Icons.format_clear));
+  List<ImageIcon> getIcons1() {
+    var icons = <ImageIcon>[];
+    if (bold) {
+      icons.add(ImageIcon(
+          Icon(Icons.format_bold),
+          Image.asset(
+            'packages/html_editor_enhanced/images/bold@3x.png',
+            width: imageSize,
+            height: imageSize,
+          )));
+    }
+    if (italic) {
+      icons.add(ImageIcon(
+          Icon(Icons.format_italic),
+          Image.asset(
+            'packages/html_editor_enhanced/images/tilt@3x.png',
+            width: imageSize,
+            height: imageSize,
+          )));
+    }
+    if (underline) {
+      icons.add(ImageIcon(
+          Icon(Icons.format_underline), Icon(Icons.format_underline)));
+    }
+    if (clearAll) {
+      icons.add(ImageIcon(Icon(Icons.format_clear), Icon(Icons.format_clear)));
+    }
     return icons;
   }
 
@@ -199,21 +222,67 @@ class OtherButtons extends Toolbar {
     this.close = true,
   });
 
-  List<Icon> getIcons1() {
-    var icons = <Icon>[];
-    if (fullscreen) icons.add(Icon(Icons.fullscreen));
-    if (codeview) icons.add(Icon(Icons.code));
-    if (undo) icons.add(Icon(Icons.undo));
-    if (redo) icons.add(Icon(Icons.redo));
-    if (help) icons.add(Icon(Icons.help_outline));
+  List<ImageIcon> getIcons1() {
+    var icons = <ImageIcon>[];
+    if (fullscreen) {
+      icons.add(ImageIcon(Icon(Icons.fullscreen), Icon(Icons.fullscreen)));
+    }
+    if (codeview) icons.add(ImageIcon(Icon(Icons.code), Icon(Icons.code)));
+    if (undo) {
+      icons.add(ImageIcon(
+          Icon(Icons.undo),
+          Image.asset(
+            'packages/html_editor_enhanced/images/withdraw@3x.png',
+            width: imageSize,
+            height: imageSize,
+          )));
+    }
+    if (redo) {
+      icons.add(ImageIcon(
+          Icon(Icons.redo),
+          Image.asset(
+            'packages/html_editor_enhanced/images/withdraw4@3x.png',
+            width: imageSize,
+            height: imageSize,
+          )));
+    }
+    if (help) {
+      icons.add(ImageIcon(Icon(Icons.help_outline), Icon(Icons.help_outline)));
+    }
     return icons;
   }
 
-  List<Icon> getIcons2() {
-    var icons = <Icon>[];
-    if (copy) icons.add(Icon(Icons.copy));
-    if (paste) icons.add(Icon(Icons.paste));
-    if (close) icons.add(Icon(Icons.close));
+  List<ImageIcon> getIcons2() {
+    var icons = <ImageIcon>[];
+    if (copy) icons.add(ImageIcon(Icon(Icons.copy), Icon(Icons.copy)));
+    if (paste) {
+      icons.add(ImageIcon(
+          Icon(Icons.paste),
+          Image.asset(
+            'packages/html_editor_enhanced/images/paste@3x.png',
+            width: imageSize,
+            height: imageSize,
+          )));
+    }
+    if (close) {
+      icons.add(ImageIcon(
+          Icon(Icons.close),
+          Image.asset(
+            'packages/html_editor_enhanced/images/cha@3x.png',
+            width: imageSize,
+            height: imageSize,
+          )));
+    }
     return icons;
+  }
+}
+
+class ImageIcon {
+  late Icon mIcon;
+  late Widget mWidget;
+
+  ImageIcon(Icon icon, Widget widget) {
+    this.mIcon = icon;
+    this.mWidget = widget;
   }
 }

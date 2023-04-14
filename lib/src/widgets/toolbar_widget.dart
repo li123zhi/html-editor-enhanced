@@ -252,13 +252,13 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
       for (var t in widget.htmlToolbarOptions.defaultToolbarButtons) {
         if (t is FontButtons) {
           for (var i = 0; i < _fontSelected.length; i++) {
-            if (t.getIcons1()[i].icon == Icons.format_bold) {
+            if (t.getIcons1()[i].mIcon.icon == Icons.format_bold) {
               _fontSelected[i] = fontList[0] ?? false;
             }
-            if (t.getIcons1()[i].icon == Icons.format_italic) {
+            if (t.getIcons1()[i].mIcon.icon == Icons.format_italic) {
               _fontSelected[i] = fontList[1] ?? false;
             }
-            if (t.getIcons1()[i].icon == Icons.format_underline) {
+            if (t.getIcons1()[i].mIcon.icon == Icons.format_underline) {
               _fontSelected[i] = fontList[2] ?? false;
             }
           }
@@ -919,7 +919,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 });
               }
 
-              if (t.getIcons1()[index].icon == Icons.format_bold) {
+              if (t.getIcons1()[index].mIcon.icon == Icons.format_bold) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.bold, _fontSelected[index],
                             updateStatus) ??
@@ -929,7 +929,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   updateStatus();
                 }
               }
-              if (t.getIcons1()[index].icon == Icons.format_italic) {
+              if (t.getIcons1()[index].mIcon.icon == Icons.format_italic) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.italic, _fontSelected[index],
                             updateStatus) ??
@@ -939,7 +939,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   updateStatus();
                 }
               }
-              if (t.getIcons1()[index].icon == Icons.format_underline) {
+              if (t.getIcons1()[index].mIcon.icon == Icons.format_underline) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.underline, _fontSelected[index],
                             updateStatus) ??
@@ -949,7 +949,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   updateStatus();
                 }
               }
-              if (t.getIcons1()[index].icon == Icons.format_clear) {
+              if (t.getIcons1()[index].mIcon.icon == Icons.format_clear) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.clearFormatting, null, null) ??
                     true;
@@ -959,7 +959,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
               }
             },
             isSelected: _fontSelected,
-            children: t.getIcons1(),
+            children: _getFontIcon1(t),
           ));
         }
         if (t.strikethrough || t.superscript || t.subscript) {
@@ -2621,7 +2621,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                 });
               }
 
-              if (t.getIcons1()[index].icon == Icons.fullscreen) {
+              if (t.getIcons1()[index].mIcon.icon == Icons.fullscreen) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.fullscreen, _miscSelected[index],
                             updateStatus) ??
@@ -2631,7 +2631,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   updateStatus();
                 }
               }
-              if (t.getIcons1()[index].icon == Icons.code) {
+              if (t.getIcons1()[index].mIcon.icon == Icons.code) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.codeview, _miscSelected[index],
                             updateStatus) ??
@@ -2641,7 +2641,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   updateStatus();
                 }
               }
-              if (t.getIcons1()[index].icon == Icons.undo) {
+              if (t.getIcons1()[index].mIcon.icon == Icons.undo) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.undo, null, null) ??
                     true;
@@ -2649,7 +2649,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   widget.controller.undo();
                 }
               }
-              if (t.getIcons1()[index].icon == Icons.redo) {
+              if (t.getIcons1()[index].mIcon.icon == Icons.redo) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.redo, null, null) ??
                     true;
@@ -2657,7 +2657,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   widget.controller.redo();
                 }
               }
-              if (t.getIcons1()[index].icon == Icons.help_outline) {
+              if (t.getIcons1()[index].mIcon.icon == Icons.help_outline) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.help, null, null) ??
                     true;
@@ -2904,7 +2904,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
               }
             },
             isSelected: _miscSelected,
-            children: t.getIcons1(),
+            children: _getIcon1(t),
           ));
         }
         if (t.copy || t.paste) {
@@ -2928,7 +2928,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
             renderBorder: widget.htmlToolbarOptions.renderBorder,
             textStyle: widget.htmlToolbarOptions.textStyle,
             onPressed: (int index) async {
-              if (t.getIcons2()[index].icon == Icons.copy) {
+              if (t.getIcons2()[index].mIcon.icon == Icons.copy) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.copy, null, null) ??
                     true;
@@ -2937,7 +2937,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   await Clipboard.setData(ClipboardData(text: data));
                 }
               }
-              if (t.getIcons2()[index].icon == Icons.paste) {
+              if (t.getIcons2()[index].mIcon.icon == Icons.paste) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.paste, null, null) ??
                     true;
@@ -2949,7 +2949,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
                   }
                 }
               }
-              if (t.getIcons2()[index].icon == Icons.close) {
+              if (t.getIcons2()[index].mIcon.icon == Icons.close) {
                 var proceed = await widget.htmlToolbarOptions.onButtonPressed
                         ?.call(ButtonType.close, null, null) ??
                     true;
@@ -2963,7 +2963,7 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
               }
             },
             isSelected: List<bool>.filled(t.getIcons2().length, false),
-            children: t.getIcons2(),
+            children: _getIcon2(t),
           ));
         }
       }
@@ -2997,5 +2997,32 @@ class ToolbarWidgetState extends State<ToolbarWidget> {
           .toList();
     }*/
     return toolbarChildren;
+  }
+
+  List<Widget> _getFontIcon1(FontButtons t) {
+    var icons = <Widget>[];
+    var list = t.getIcons1();
+    list.forEach((element) {
+      icons.add(element.mWidget);
+    });
+    return icons;
+  }
+
+  List<Widget> _getIcon1(OtherButtons t) {
+    var icons = <Widget>[];
+    var list = t.getIcons1();
+    list.forEach((element) {
+      icons.add(element.mWidget);
+    });
+    return icons;
+  }
+
+  List<Widget> _getIcon2(OtherButtons t) {
+    var icons = <Widget>[];
+    var list = t.getIcons2();
+    list.forEach((element) {
+      icons.add(element.mWidget);
+    });
+    return icons;
   }
 }

@@ -44,6 +44,12 @@ dev_dependencies:
 flutter:
 
   assets:
+    - packages/html_editor_enhanced/images/bold@3x.png
+    - packages/html_editor_enhanced/images/cha@3x.png
+    - packages/html_editor_enhanced/images/tilt@3x.png
+    - packages/html_editor_enhanced/images/paste@3x.png
+    - packages/html_editor_enhanced/images/withdraw@3x.png
+    - packages/html_editor_enhanced/images/withdraw4@3x.png
     - packages/html_editor_enhanced/assets/summernote.html
     - packages/html_editor_enhanced/assets/summernote-no-plugins.html
     - packages/html_editor_enhanced/assets/summernote-lite.min.css
