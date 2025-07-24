@@ -452,6 +452,7 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
                       await controller.evaluateJavascript(
                           source:
                               "document.getElementsByClassName('note-editable')[0].setAttribute('inputmode', '${describeEnum(widget.htmlEditorOptions.inputType)}');");
+                      await injectRTLDirection(controller, context);
                       if ((Theme.of(context).brightness == Brightness.dark ||
                               widget.htmlEditorOptions.darkMode == true) &&
                           widget.htmlEditorOptions.darkMode != false) {
@@ -555,6 +556,31 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
         ),
       ),
     );
+  }
+
+  Future<void> injectRTLDirection(
+    InAppWebViewController controller,
+    BuildContext context,
+  ) async {
+    // final isRTL = false;
+    final isRTL = Directionality.of(context) == TextDirection.rtl;
+    final direction = isRTL ? 'rtl' : 'ltr';
+    final align = isRTL ? 'right' : 'left';
+
+    await controller.evaluateJavascript(source: """
+    document.documentElement.setAttribute('dir', '$direction');
+    document.body.style.direction = '$direction';
+    document.body.style.textAlign = '$align';
+    var editable = document.querySelector('.note-editable');
+    if (editable) {
+      editable.style.direction = '$direction';
+      editable.style.textAlign = '$align';
+    }
+    var toolbar = document.querySelector('.note-toolbar');
+    if (toolbar) {
+      toolbar.style.direction = '$direction';
+    }
+  """);
   }
 
   /// adds the callbacks set by the user into the scripts
