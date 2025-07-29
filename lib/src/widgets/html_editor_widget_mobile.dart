@@ -558,30 +558,69 @@ class _HtmlEditorWidgetMobileState extends State<HtmlEditorWidget> {
     );
   }
 
-  Future<void> injectRTLDirection(
-    InAppWebViewController controller,
-    BuildContext context,
-  ) async {
-    // final isRTL = false;
+  // Future<void> injectRTLDirection(
+  //   InAppWebViewController controller,
+  //   BuildContext context,
+  // ) async {
+  //   // final isRTL = false;
+  //   final isRTL = Directionality.of(context) == TextDirection.rtl;
+  //   final direction = isRTL ? 'rtl' : 'ltr';
+  //   final align = isRTL ? 'right' : 'left';
+  //
+  //   await controller.evaluateJavascript(source: """
+  //   document.documentElement.setAttribute('dir', '$direction');
+  //   document.body.style.direction = '$direction';
+  //   document.body.style.textAlign = '$align';
+  //   var editable = document.querySelector('.note-editable');
+  //   if (editable) {
+  //     editable.style.direction = '$direction';
+  //     editable.style.textAlign = '$align';
+  //   }
+  //   var toolbar = document.querySelector('.note-toolbar');
+  //   if (toolbar) {
+  //     toolbar.style.direction = '$direction';
+  //   }
+  // """);
+  // }
+
+  Future<void> injectRTLDirection(InAppWebViewController controller, BuildContext context) async {
     final isRTL = Directionality.of(context) == TextDirection.rtl;
     final direction = isRTL ? 'rtl' : 'ltr';
     final align = isRTL ? 'right' : 'left';
+    // final direction = isRTL ? 'rtl' : 'ltr';
+    // final align = isRTL ? 'right' : 'left';
 
     await controller.evaluateJavascript(source: """
     document.documentElement.setAttribute('dir', '$direction');
     document.body.style.direction = '$direction';
     document.body.style.textAlign = '$align';
+
     var editable = document.querySelector('.note-editable');
     if (editable) {
       editable.style.direction = '$direction';
       editable.style.textAlign = '$align';
     }
+
     var toolbar = document.querySelector('.note-toolbar');
     if (toolbar) {
       toolbar.style.direction = '$direction';
+      toolbar.style.textAlign = '$align';
+    }
+
+    var noteEditor = document.querySelector('.note-editor');
+    if (noteEditor) {
+      noteEditor.style.direction = '$direction';
+      noteEditor.style.textAlign = '$align';
+    }
+
+    var placeholder = document.querySelector('.note-placeholder');
+    if (placeholder) {
+      placeholder.style.direction = '$direction';
+      placeholder.style.textAlign = '$align';
     }
   """);
   }
+
 
   /// adds the callbacks set by the user into the scripts
   void addJSCallbacks(Callbacks c) {
